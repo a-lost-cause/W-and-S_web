@@ -118,15 +118,15 @@
             } 
 
             // Draw History Lines
-            drawHistory(history1, "#4caf50", width, height);
-            drawHistory(history2, "#2196f3", width, height);
+            drawHistory(history1, "#7fd0a0", width, height);
+            drawHistory(history2, "#4aaeff", width, height);
 
             // Legend
             ctx.font = "14px Arial";
-            ctx.textAlign = "left";
-            ctx.fillStyle = "#4caf50";
+            ctx.textAlign = "Center";
+            ctx.fillStyle = "#7fd0a0"; 
             ctx.fillText("● Turbine Audio", 70, 25);
-            ctx.fillStyle = "#2196f3";
+            ctx.fillStyle = "#4aaeff"; 
             ctx.fillText("● Background", 190, 25);
         }
 
