@@ -107,7 +107,7 @@
                 ctx.stroke();    
             }
 
-              // Y-axis labels
+              /* / Y-axis labels
             ctx.fillStyle = "#777";
             ctx.font = "12px Arial";
             ctx.textAlign = "left";
@@ -115,7 +115,23 @@
                 const value = i * 10;
                 const y = height - (i / 10) * height;
                 //ctx.fillText(value + "%", 5, y - 4); 
-            } 
+            }  */
+
+            // Y-axis labels (every 20 units) + axis title
+            ctx.fillStyle = "#8a96a6";
+            ctx.font = "11px Arial";
+            ctx.textAlign = "left";
+            for (let i = 1; i <= 9; i += 2) {
+            const value = i * 10;                          // 0, 20, 40, 60, 80, 100
+            const y = height - (i / 10) * height;
+            const labelY = (i === 10) ? y + 12 : y - 4;    // keep the top label inside the canvas
+            ctx.fillText(value, 5, labelY);
+            }
+            ctx.textAlign = "right";
+            ctx.fillText("Level (dB)", width - 6, height - 6);
+            ctx.textAlign = "left";                            // reset so the legend below isn't right-aligned
+
+
 
             // Draw History Lines
             drawHistory(history1, "#7fd0a0", width, height);
@@ -123,7 +139,7 @@
 
             // Legend
             ctx.font = "14px Arial";
-            ctx.textAlign = "Center";
+            ctx.textAlign = "left";
             ctx.fillStyle = "#7fd0a0"; 
             ctx.fillText("● Turbine Audio", 70, 25);
             ctx.fillStyle = "#4aaeff"; 
@@ -310,10 +326,15 @@
 
         animate();
 
-        // --- 8. WINDOW RESIZE ---
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight); 
-        });
+     
     
+
+        // --- 8. RESIZE: follow the container, not the window ---
+function fitRenderer() {
+    const w = container.clientWidth, h = container.clientHeight;
+    if (!w || !h) return;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+}
+window.addEventListener('resize', fitRenderer);
