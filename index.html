@@ -9,6 +9,11 @@
 <meta property="og:description" content="Physics-based wind turbine noise simulation, turned into audio you can explore.">
 <meta property="og:type" content="website">
 
+<link rel="icon" href="icon_logo.svg" type="image/svg+xml">
+<!-- if you use a PNG instead: -->
+<!-- <link rel="icon" href="favicon.png" type="image/png"> -->
+<link rel="apple-touch-icon" href="icon_logo.svg">
+
 <!-- CONFIG: replace with your real social image URL -->
 <meta property="og:image" content="OG_IMAGE_URL_PLACEHOLDER"> 
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,9 +35,14 @@ section{padding:88px 0}.alt{background:var(--sec2)}
 .btn-p{background:var(--green);color:#fff}.btn-s{background:transparent;color:var(--ink);border-color:var(--ink)}
 .btn-p:hover,.btn-s:hover{transform:translateY(-2px)}
 :focus-visible{outline:3px solid #3b8fd0;outline-offset:3px}
-header.nav{position:sticky;top:0;z-index:50;background:var(--navy);color:#f1ede2;padding-top:env(safe-area-inset-top,0)}
+
+header.nav{position:sticky;top:0;z-index:50;background:#0d284b;color:#f1ede2;padding-top:env(safe-area-inset-top,0)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
-.logo{font-weight:800;letter-spacing:-.01em;text-decoration:none}.logo span{color:#7fd0a0}
+
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.01em;text-decoration:none}
+.logo img{display:block;width:28px;height:28px}
+.logo-text span{color:#7fd0a0} 
+
 .nav nav{display:flex;gap:22px;align-items:center;font-size:.92rem}.nav nav a{text-decoration:none;opacity:.85}.nav nav a:hover{opacity:1}
 .nav .btn-p{padding:.45rem .9rem;font-size:.88rem;opacity:1}
 @media(max-width:760px){.nav nav a:not(.btn-p){display:none}}
@@ -111,6 +121,19 @@ footer small{display:block;max-width:100ch;color:#a7b3c2;line-height:1.55}
 .consent-btn:hover{background:#f1ede2;color:#0c1b2e}
 
 
+/* watermark */
+.watermark{position:relative;overflow:hidden}
+.watermark::before{
+  content:"";position:absolute;z-index:0;pointer-events:none;
+  right:-1%;top:50%;transform:translateY(-50%);
+  width:min(520px,60vw);aspect-ratio:0.8;
+  background:url("icon_logo3.svg") no-repeat center/contain;   /* or favicon.png */
+  opacity:.10;
+}
+.watermark>.wrap{position:relative;z-index:1}               /* keeps text above the watermark */
+.pilot.watermark::before{filter:brightness(0) invert(1);opacity:.07}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .watermark::before{filter:brightness(0) invert(1)}}
+
 </style>
 </head>
 <body>
@@ -118,16 +141,20 @@ footer small{display:block;max-width:100ch;color:#a7b3c2;line-height:1.55}
 <symbol id="wt" viewBox="0 0 60 84"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M30 80V30"/><path d="M30 30V6M30 30l-20 12M30 30l20 12"/></g><circle cx="30" cy="30" r="3" fill="currentColor"/></symbol></defs></svg>
 
 <header class="nav"><div class="wrap">
-<a class="logo" href="#top">Wind<span>&amp;</span>Sound</a>
+<a class="logo" href="#top">
+  <img src="icon_logo.svg" alt="" width="38" height="38">
+  <span class="logo-text">Wind<span>&amp;</span>Sound</span>
+</a>
 <nav aria-label="Main"><a href="#demo">Demo</a>
     <a href="#about">About</a>
     <a class="btn-p" href="#contact" data-topic="pilot">Get in touch</a></nav>
 </div></header>
 
 <main id="top">
-<div class="hero"><div class="wrap">
+<div class="hero watermark"><div class="wrap">
 <p class="eyebrow">WIND&amp;SOUND PRESENTS</p>
-<h1 >SonicWind</h1>
+ 
+<h1 >  SonicWind</h1>
 <h2>Hear the wind farm before it’s built.</h2>
 <p class="lead">From physics-based wind turbine noise predictions into an audio experience. <br> Helping people explore how the wind farm may be heard at the right level and in the right context.</p>
 <div class="cta-row"><a class="btn-p" href="#demo">Explore the interactive demo</a><a class="btn-s" href="#contact" data-topic="pilot">Discuss a pilot project</a></div>
@@ -151,7 +178,7 @@ footer small{display:block;max-width:100ch;color:#a7b3c2;line-height:1.55}
 <h2 id="demo-h" class="eyebrow" style="font-size:.78rem;letter-spacing:.16em;margin-bottom:.8rem">Interactive demo</h2>
 
 <div class="demo-card">
-<div class="demo-head"><b>SonicWind prototype — wind turbine noise auralized</b><span>Single turbine at 500m · Blade span 45 m · Hub height 80 m</span></div>
+<div class="demo-head"><b>SonicWind prototype — wind turbine noise auralized</b><span>Single turbine · Blade span 45 m · Hub height 80 m</span></div>
 <div class="stage">
   <div id="canvas-container" role="img" aria-label="3D landscape with a single wind turbine, viewed from the selected listening position"></div>
 
